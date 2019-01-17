@@ -19,7 +19,6 @@ else{
     $yt = new YTDownloader();
     if($playlistId == ""){
         $youtube_id = $yt->extractId($_GET['q']);
-        //$url = 'https://video.genyoutube.net/'.$youtube_id;
         $links = $yt->getDownloadLinks($youtube_id);
         //var_dump($links);
         for($i=0;$i<count($links['dl']);$i++){
@@ -44,7 +43,7 @@ else{
         $url = parse_url($_GET['q']);
         parse_str($url['query'], $q);
         $playlistId = $q['list'];
-        //Get Youtube's cJson
+        //Get Youtube's Json
         $pagination = "";
         $input = file_get_contents("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=" . $playlistId . "&key=AIzaSyBEfUHT2pTNUiAm4L_jOddo5eggAccsaWg&pageToken='.$pagination.'");
         $result = json_decode($input, true);
@@ -57,8 +56,6 @@ else{
             $yt = new YTDownloader();
             for ($i = 0; $i < $sum; $i++) {
                 $youtube_id = $result['items'][$i]['snippet']['resourceId']['videoId'];
-                $yt = new YTDowncdloader();
-                $url = 'https://video.genyoutube.net/'.$youtube_id;
                 $links = $yt->getDownloadLinks($youtube_id);
                 //var_dump($links);
                 for($ii=0;$ii<count($links['dl']);$ii++){
